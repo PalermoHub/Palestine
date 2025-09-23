@@ -2,17 +2,17 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.5, maximum-scale=3.0">
     <title>Vittime del Conflitto a Gaza - Analisi Demografica</title>
     <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
     <meta http-equiv="content-language" content="IT">
     <meta name="robots" content="index,follow">
-    <meta name="creation_Date" content=23/09/2025>
+    <meta name="creation_Date" content="23/09/2025">
     <link rel="shortcut icon" href="favicon.ico"/> 
     <link rel="icon" href="favicon.png" type="image/png"/> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 	
-		    <!-- Meta tags per social sharing pen Graph Protocol -->
+    <!-- Meta tags per social sharing pen Graph Protocol -->
     <meta property="og:url" content="https://palermohub.github.io/Palestine/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="In memoria delle vite perdute. Questa analisi presenta i dati demografici delle 60,199 vittime documentate nel conflitto (23/09/2025), con l'obiettivo di fornire una comprensione rispettosa della tragedia umana. by @opendatasicilia">
@@ -26,74 +26,87 @@
     <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
     <meta name="twitter:image" content="https://palermohub.github.io/Palestine/img/social_card.jpg">
 	
-	
     <style>
+        /* Reset e base styles */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Georgia', serif;
             margin: 0;
-            padding: 20px;
+            padding: clamp(10px, 3vw, 20px);
             background: #f8f9fa;
             min-height: 100vh;
             color: #2c3e50;
+            line-height: 1.6;
+            font-size: clamp(14px, 2.5vw, 16px);
         }
         
         .container {
             max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 10px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: clamp(5px, 1vw, 10px);
+            padding: clamp(20px, 4vw, 40px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             border-top: 4px solid #34495e;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 50px;
-            padding-bottom: 30px;
+            margin-bottom: clamp(30px, 5vw, 50px);
+            padding-bottom: clamp(20px, 3vw, 30px);
             border-bottom: 2px solid #ecf0f1;
         }
         
         .title {
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
             font-weight: bold;
             color: #2c3e50;
             margin-bottom: 15px;
             line-height: 1.2;
+            hyphens: auto;
+            word-break: break-word;
         }
         
         .subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: #7f8c8d;
             margin-bottom: 20px;
             font-style: italic;
+            padding: 0 10px;
         }
         
         .memorial-note {
             background: #34495e;
             color: white;
-            padding: 20px;
+            padding: clamp(15px, 3vw, 20px);
             border-radius: 8px;
-            margin-bottom: 40px;
+            margin-bottom: clamp(30px, 4vw, 40px);
             text-align: center;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             line-height: 1.6;
         }
         
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: clamp(15px, 3vw, 25px);
+            margin-bottom: clamp(30px, 5vw, 50px);
         }
         
         .stat-card {
             background: #f8f9fa;
-            padding: 30px;
+            padding: clamp(20px, 4vw, 30px);
             border-radius: 8px;
             text-align: center;
             border: 1px solid #dee2e6;
             border-left: 5px solid;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .stat-card.male { border-left-color: #5d6d7e; }
@@ -105,10 +118,11 @@
         }
         
         .stat-number {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
             font-weight: bold;
             margin-bottom: 10px;
             font-family: 'Arial', sans-serif;
+            word-break: break-all;
         }
         
         .stat-number.male { color: #5d6d7e; }
@@ -117,89 +131,110 @@
         .stat-number.minors { color: #e74c3c; }
         
         .stat-label {
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #566573;
             font-weight: 600;
+            line-height: 1.4;
         }
         
         .minors-highlight {
             background: linear-gradient(135deg, #fdedec 0%, #fadbd8 100%);
             border: 2px solid #e74c3c;
-            padding: 35px;
+            padding: clamp(25px, 4vw, 35px);
             border-radius: 10px;
-            margin: 50px 0;
+            margin: clamp(30px, 5vw, 50px) 0;
             text-align: center;
         }
         
         .minors-highlight h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             margin-bottom: 20px;
             color: #c0392b;
             font-weight: bold;
+            hyphens: auto;
         }
         
         .minors-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: clamp(15px, 3vw, 20px);
+            margin-top: clamp(20px, 3vw, 30px);
         }
         
         .minors-stat {
             background: rgba(255,255,255,0.8);
-            padding: 20px;
+            padding: clamp(15px, 3vw, 20px);
             border-radius: 8px;
             border: 1px solid #e6b3b3;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .minors-stat h3 {
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
             margin-bottom: 5px;
             color: #e74c3c;
             font-family: 'Arial', sans-serif;
+            word-break: break-all;
         }
         
         .minors-stat p {
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #922b21;
+            line-height: 1.4;
+            margin: 0;
         }
         
         .charts-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 50px 0;
+            grid-template-columns: 1fr;
+            gap: clamp(30px, 5vw, 40px);
+            margin: clamp(30px, 5vw, 50px) 0;
         }
         
         .chart-wrapper {
             background: #f8f9fa;
             border-radius: 10px;
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border: 1px solid #dee2e6;
+            overflow: hidden;
         }
         
         .chart-title {
             text-align: center;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
             font-weight: bold;
             color: #2c3e50;
-            margin-bottom: 25px;
+            margin-bottom: clamp(20px, 3vw, 25px);
             padding-bottom: 15px;
             border-bottom: 2px solid #ecf0f1;
+            hyphens: auto;
+            line-height: 1.3;
         }
         
         .chart-container {
             position: relative;
-            height: 500px;
+            height: clamp(350px, 50vh, 500px);
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .chart-container canvas {
+            max-width: 100% !important;
+            height: auto !important;
         }
         
         .legend {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 40px;
-            margin: 40px 0;
+            align-items: center;
+            gap: clamp(20px, 4vw, 40px);
+            margin: clamp(30px, 4vw, 40px) 0;
             background: #f8f9fa;
-            padding: 20px;
+            padding: clamp(15px, 3vw, 20px);
             border-radius: 8px;
             border: 1px solid #dee2e6;
         }
@@ -209,14 +244,16 @@
             align-items: center;
             gap: 12px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #2c3e50;
+            white-space: nowrap;
         }
         
         .legend-color {
             width: 20px;
             height: 20px;
             border-radius: 3px;
+            flex-shrink: 0;
         }
         
         .legend-color.male { background-color: #5d6d7e; }
@@ -224,14 +261,14 @@
         
         .analysis {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+            gap: clamp(20px, 3vw, 30px);
+            margin-top: clamp(30px, 5vw, 50px);
         }
         
         .analysis-card {
             background: #f8f9fa;
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border-radius: 10px;
             border-left: 4px solid #5d6d7e;
             border: 1px solid #dee2e6;
@@ -240,29 +277,36 @@
         .analysis-card h3 {
             color: #2c3e50;
             margin-bottom: 20px;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
             font-weight: bold;
+            hyphens: auto;
         }
         
         .analysis-list {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
         
         .analysis-list li {
             margin-bottom: 15px;
-            padding: 15px;
+            padding: clamp(12px, 2vw, 15px);
             background: white;
             border-radius: 5px;
             color: #34495e;
             line-height: 1.6;
             border-left: 3px solid #bdc3c7;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+        
+        .analysis-list li:last-child {
+            margin-bottom: 0;
         }
         
         .source {
             text-align: center;
-            margin-top: 50px;
-            padding: 30px;
+            margin-top: clamp(30px, 5vw, 50px);
+            padding: clamp(20px, 4vw, 30px);
             background: #2c3e50;
             color: white;
             border-radius: 10px;
@@ -271,10 +315,11 @@
         .source p {
             margin: 10px 0;
             line-height: 1.6;
+            font-size: clamp(0.8rem, 2vw, 1rem);
         }
         
         .source .credit {
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             font-weight: bold;
             color: #ecf0f1;
             margin-top: 20px;
@@ -286,25 +331,185 @@
         a {
             color: #ffffff;
             text-decoration: none;
+            word-break: break-word;
+            hyphens: auto;
         }
 
         a:hover {
             color: #ff9900;
             text-decoration: underline;
         }
+
+        /* Touch-friendly interactions */
+        .stat-card,
+        .minors-stat,
+        .analysis-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover,
+        .minors-stat:hover,
+        .analysis-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
         
-        @media (max-width: 768px) {
-            .charts-container {
+        /* Responsive breakpoints */
+        
+        /* Small mobile devices (320px - 480px) */
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+                font-size: 14px;
+            }
+            
+            .container {
+                padding: 15px;
+                border-radius: 5px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .minors-stats {
                 grid-template-columns: 1fr;
             }
+            
+            .chart-container {
+                height: 300px;
+            }
+            
+            .legend {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .analysis {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: 1.6rem;
+                word-break: break-word;
+            }
+        }
+        
+        /* Large mobile devices (481px - 768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .minors-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .chart-container {
                 height: 400px;
             }
-            .title {
-                font-size: 2.2rem;
+            
+            .charts-container {
+                grid-template-columns: 1fr;
             }
+        }
+        
+        /* Tablets (769px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
             .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .minors-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .analysis {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Small desktops (1025px - 1200px) */
+        @media (min-width: 1025px) and (max-width: 1200px) {
+            .charts-container {
                 grid-template-columns: 1fr 1fr;
+            }
+            
+            .analysis {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Large desktops (1201px+) */
+        @media (min-width: 1201px) {
+            .charts-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .analysis {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Landscape orientation adjustments */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .chart-container {
+                height: 250px;
+            }
+            
+            .title {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+            
+            .header {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+        }
+        
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .container {
+                box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            }
+        }
+        
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                font-size: 12pt;
+            }
+            
+            .container {
+                box-shadow: none;
+                border: 1px solid #000;
+                padding: 20px;
+            }
+            
+            .chart-container {
+                height: 400px;
+                page-break-inside: avoid;
+            }
+            
+            .analysis-card,
+            .minors-highlight {
+                page-break-inside: avoid;
             }
         }
     </style>
@@ -342,7 +547,7 @@
         
         <div class="minors-highlight">
             <h2>Vittime minorenni (0-17 anni)</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #922b21;">
+            <p style="font-size: clamp(0.9rem, 2.5vw, 1.1rem); margin-bottom: 10px; color: #922b21;">
                 <strong>18,457 bambini e adolescenti hanno perso la vita, rappresentando il 30.7% del totale</strong>
             </p>
             <div class="minors-stats">
@@ -447,16 +652,22 @@
         const maxValue = Math.max(...maleData, ...femaleData);
         const minorMaxValue = Math.max(...minorMaleData, ...minorFemaleData);
 
-        // Configurazione comune per tooltips migliorati
-        const getImprovedTooltipConfig = (isMinorChart = false) => {
+        // Funzione per determinare se siamo su mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Configurazione responsive per tooltips
+        const getResponsiveTooltipConfig = (isMinorChart = false) => {
             const total = isMinorChart ? 18457 : 60199;
+            const mobile = isMobile();
             
             return {
                 enabled: true,
-                external: null, // Usa il tooltip nativo per migliore performance
-                position: 'nearest', // Posiziona il tooltip vicino al punto
+                external: null,
+                position: 'nearest',
                 animation: {
-                    duration: 200,
+                    duration: mobile ? 100 : 200,
                     easing: 'easeInOutCubic'
                 },
                 backgroundColor: 'rgba(44, 62, 80, 0.95)',
@@ -464,43 +675,44 @@
                 bodyColor: '#bdc3c7',
                 footerColor: '#95a5a6',
                 borderColor: '#34495e',
-                borderWidth: 2,
-                cornerRadius: 8,
+                borderWidth: mobile ? 1 : 2,
+                cornerRadius: mobile ? 6 : 8,
                 displayColors: true,
-                padding: 15,
+                padding: mobile ? 10 : 15,
                 titleFont: {
-                    size: 14,
+                    size: mobile ? 12 : 14,
                     weight: 'bold',
                     family: 'Arial, sans-serif'
                 },
                 bodyFont: {
-                    size: 13,
+                    size: mobile ? 11 : 13,
                     family: 'Arial, sans-serif'
                 },
                 footerFont: {
-                    size: 12,
+                    size: mobile ? 10 : 12,
                     family: 'Arial, sans-serif',
                     style: 'italic'
                 },
                 multiKeyBackground: '#2c3e50',
                 usePointStyle: true,
-                boxPadding: 6,
+                boxPadding: mobile ? 4 : 6,
                 callbacks: {
                     title: function(context) {
-                        return `Fascia d'età: ${context[0].label}`;
+                        return mobile ? `Età: ${context[0].label}` : `Fascia d'età: ${context[0].label}`;
                     },
                     beforeBody: function(context) {
-                        // Aggiungi una riga separatrice visiva
-                        return ['—————————————————————'];
+                        return mobile ? [] : ['————————————————————'];
                     },
                     label: function(context) {
                         const value = Math.abs(context.raw);
                         const percentage = ((value / total) * 100).toFixed(1);
-                        const gender = context.datasetIndex === 0 ? 'Uomini/Ragazzi' : 'Donne/Ragazze';
-                        return `${gender}: ${value.toLocaleString('it-IT')} vittime (${percentage}%)`;
+                        const gender = context.datasetIndex === 0 ? (mobile ? 'M' : 'Uomini/Ragazzi') : (mobile ? 'F' : 'Donne/Ragazze');
+                        return mobile ? 
+                            `${gender}: ${value.toLocaleString('it-IT')} (${percentage}%)` :
+                            `${gender}: ${value.toLocaleString('it-IT')} vittime (${percentage}%)`;
                     },
                     afterBody: function(context) {
-                        if (context.length >= 2) {
+                        if (context.length >= 2 && !mobile) {
                             const maleValue = Math.abs(context[0].raw);
                             const femaleValue = context[1].raw;
                             const ageTotal = maleValue + femaleValue;
@@ -515,40 +727,44 @@
                         return [];
                     },
                     footer: function(context) {
-                        return isMinorChart ? 'Dati: vittime minorenni (0-17 anni)' : 'Dati: tutte le vittime documentate';
+                        return mobile ? '' : (isMinorChart ? 'Dati: vittime minorenni (0-17 anni)' : 'Dati: tutte le vittime documentate');
                     }
                 }
             };
         };
 
-        // Configurazione migliorata per l'interazione
-        const getImprovedInteractionConfig = () => {
+        // Configurazione responsive per l'interazione
+        const getResponsiveInteractionConfig = () => {
+            const mobile = isMobile();
             return {
-                mode: 'point', // Cambiato da 'index' a 'point' per maggiore precisione
-                intersect: false, // Mantiene il tooltip anche se non interseca esattamente
+                mode: mobile ? 'nearest' : 'point',
+                intersect: false,
                 includeInvisible: false,
-                axis: 'xy' // Considera entrambi gli assi per l'interazione
+                axis: 'xy'
             };
         };
 
-        // Configurazione comune per piramidi dell'età con tooltips migliorati
-        const getCommonOptions = (isMinorChart = false) => {
+        // Configurazione responsive per le opzioni comuni
+        const getResponsiveCommonOptions = (isMinorChart = false) => {
             const maxVal = isMinorChart ? minorMaxValue : maxValue;
+            const mobile = isMobile();
             
             return {
                 indexAxis: 'y',
                 responsive: true,
                 maintainAspectRatio: false,
-                interaction: getImprovedInteractionConfig(),
+                devicePixelRatio: window.devicePixelRatio || 1,
+                interaction: getResponsiveInteractionConfig(),
                 onHover: (event, activeElements, chart) => {
-                    // Cambia il cursore quando hover su elementi attivi
-                    event.native.target.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                    if (event.native && event.native.target) {
+                        event.native.target.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                    }
                 },
                 plugins: {
                     legend: {
                         display: false
                     },
-                    tooltip: getImprovedTooltipConfig(isMinorChart)
+                    tooltip: getResponsiveTooltipConfig(isMinorChart)
                 },
                 scales: {
                     x: {
@@ -559,16 +775,21 @@
                             color: 'rgba(108, 117, 125, 0.2)',
                             drawBorder: false,
                             drawOnChartArea: true,
-                            lineWidth: 1
+                            lineWidth: mobile ? 0.5 : 1
                         },
                         ticks: {
                             callback: function(value) {
-                                return Math.abs(value).toLocaleString('it-IT');
+                                const absValue = Math.abs(value);
+                                if (mobile && absValue >= 1000) {
+                                    return (absValue / 1000).toFixed(0) + 'k';
+                                }
+                                return absValue.toLocaleString('it-IT');
                             },
                             color: '#566573',
                             font: {
-                                size: 11
-                            }
+                                size: mobile ? 9 : 11
+                            },
+                            maxTicksLimit: mobile ? 6 : 8
                         }
                     },
                     y: {
@@ -579,25 +800,22 @@
                         ticks: {
                             color: '#2c3e50',
                             font: {
-                                size: 12,
+                                size: mobile ? 10 : 12,
                                 weight: 'bold'
                             }
                         }
                     }
                 },
                 layout: {
-                    padding: 10
+                    padding: mobile ? 5 : 10
                 },
-                // Impostazioni per barre più sottili e allineate
                 categoryPercentage: 0.8,
-                barPercentage: 0.7,
-                // Migliore gestione delle animazioni
+                barPercentage: mobile ? 0.8 : 0.7,
                 animation: {
-                    duration: 1000,
+                    duration: mobile ? 500 : 1000,
                     easing: 'easeInOutCubic'
                 },
-                // Hover più responsivo
-                hoverBorderWidth: 2,
+                hoverBorderWidth: mobile ? 1 : 2,
                 hoverBackgroundColor: function(context) {
                     const color = context.datasetIndex === 0 ? '#5d6d7e' : '#85929e';
                     return color;
@@ -606,72 +824,105 @@
             };
         };
 
-        // Grafico principale - piramide dell'età con tooltip migliorati
-        const ctx1 = document.getElementById('pyramidChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ageGroups,
-                datasets: [
-                    {
-                        label: 'Uomini',
-                        data: maleData.map(value => -value), // Valori negativi per la sinistra
-                        backgroundColor: '#5d6d7e',
-                        borderColor: '#5d6d7e',
-                        borderWidth: 0,
-                        borderRadius: 0,
-                        hoverBackgroundColor: '#4a5a6a',
-                        hoverBorderColor: '#2c3e50',
-                        hoverBorderWidth: 2
-                    },
-                    {
-                        label: 'Donne',
-                        data: femaleData, // Valori positivi per la destra
-                        backgroundColor: '#85929e',
-                        borderColor: '#85929e',
-                        borderWidth: 0,
-                        borderRadius: 0,
-                        hoverBackgroundColor: '#6b7b8a',
-                        hoverBorderColor: '#2c3e50',
-                        hoverBorderWidth: 2
-                    }
-                ]
-            },
-            options: getCommonOptions(false)
+        // Inizializzazione dei grafici
+        let pyramidChart, minorsChart;
+
+        function initCharts() {
+            // Distruggi i grafici esistenti se presenti
+            if (pyramidChart) {
+                pyramidChart.destroy();
+            }
+            if (minorsChart) {
+                minorsChart.destroy();
+            }
+
+            // Grafico principale - piramide dell'età
+            const ctx1 = document.getElementById('pyramidChart').getContext('2d');
+            pyramidChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ageGroups,
+                    datasets: [
+                        {
+                            label: 'Uomini',
+                            data: maleData.map(value => -value),
+                            backgroundColor: '#5d6d7e',
+                            borderColor: '#5d6d7e',
+                            borderWidth: 0,
+                            borderRadius: 0,
+                            hoverBackgroundColor: '#4a5a6a',
+                            hoverBorderColor: '#2c3e50',
+                            hoverBorderWidth: isMobile() ? 1 : 2
+                        },
+                        {
+                            label: 'Donne',
+                            data: femaleData,
+                            backgroundColor: '#85929e',
+                            borderColor: '#85929e',
+                            borderWidth: 0,
+                            borderRadius: 0,
+                            hoverBackgroundColor: '#6b7b8a',
+                            hoverBorderColor: '#2c3e50',
+                            hoverBorderWidth: isMobile() ? 1 : 2
+                        }
+                    ]
+                },
+                options: getResponsiveCommonOptions(false)
+            });
+
+            // Grafico minori - piramide dell'età
+            const ctx2 = document.getElementById('minorsChart').getContext('2d');
+            minorsChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: minorAgeGroups,
+                    datasets: [
+                        {
+                            label: 'Bambini e ragazzi',
+                            data: minorMaleData.map(value => -value),
+                            backgroundColor: '#5d6d7e',
+                            borderColor: '#5d6d7e',
+                            borderWidth: 0,
+                            borderRadius: 0,
+                            hoverBackgroundColor: '#4a5a6a',
+                            hoverBorderColor: '#2c3e50',
+                            hoverBorderWidth: isMobile() ? 1 : 2
+                        },
+                        {
+                            label: 'Bambine e ragazze',
+                            data: minorFemaleData,
+                            backgroundColor: '#85929e',
+                            borderColor: '#85929e',
+                            borderWidth: 0,
+                            borderRadius: 0,
+                            hoverBackgroundColor: '#6b7b8a',
+                            hoverBorderColor: '#2c3e50',
+                            hoverBorderWidth: isMobile() ? 1 : 2
+                        }
+                    ]
+                },
+                options: getResponsiveCommonOptions(true)
+            });
+        }
+
+        // Gestione del ridimensionamento della finestra
+        let resizeTimeout;
+        function handleResize() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                initCharts();
+            }, 250);
+        }
+
+        // Event listeners
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(handleResize, 100);
         });
 
-        // Grafico minori - piramide dell'età con tooltip migliorati
-        const ctx2 = document.getElementById('minorsChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: minorAgeGroups,
-                datasets: [
-                    {
-                        label: 'Bambini e ragazzi',
-                        data: minorMaleData.map(value => -value),
-                        backgroundColor: '#5d6d7e',
-                        borderColor: '#5d6d7e',
-                        borderWidth: 0,
-                        borderRadius: 0,
-                        hoverBackgroundColor: '#4a5a6a',
-                        hoverBorderColor: '#2c3e50',
-                        hoverBorderWidth: 2
-                    },
-                    {
-                        label: 'Bambine e ragazze',
-                        data: minorFemaleData,
-                        backgroundColor: '#85929e',
-                        borderColor: '#85929e',
-                        borderWidth: 0,
-                        borderRadius: 0,
-                        hoverBackgroundColor: '#6b7b8a',
-                        hoverBorderColor: '#2c3e50',
-                        hoverBorderWidth: 2
-                    }
-                ]
-            },
-            options: getCommonOptions(true)
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(initCharts, 100);
         });
     </script>
 </body>
